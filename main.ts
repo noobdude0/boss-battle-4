@@ -231,6 +231,7 @@ function makeOctoBOSS () {
 }
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.OcotEye, function (sprite, otherSprite) {
     eyeHP += -1
+    statusbar.value += -1
     sprite.destroy()
     if (eyeHP == 0) {
         game.over(true)
@@ -346,6 +347,7 @@ let torpedo: Sprite = null
 let torpedoDisplay: Sprite = null
 let torpedoCount = 0
 let eyeHP = 0
+let statusbar: StatusBarSprite = null
 let thePlayer: Sprite = null
 thePlayer = sprites.create(img`
     ...........ccccc66666...........
@@ -386,9 +388,11 @@ thePlayer.z = 10
 scene.setBackgroundColor(15)
 effects.starField.startScreenEffect()
 makeOctoBOSS()
+statusbar = statusbars.create(100, 4, StatusBarKind.Health)
+statusbar.positionDirection(CollisionDirection.Bottom)
 info.setLife(3)
-eyeHP = 30
-torpedoCount = 3
+eyeHP = 100
+torpedoCount = 10
 torpedoDisplay = sprites.create(img`
     . c c c c c c c c c . . 
     c b b b b b b b c 4 c . 
